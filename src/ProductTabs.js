@@ -8,18 +8,9 @@ import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
-import { Grid, Button, Container } from "@mui/material";
+import { Grid, Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import "./styles.css";
-import {
-  FaFileCsv,
-  FaPrint,
-  FaFilePdf,
-  FaEdit,
-  FaEye,
-  FaTrash,
-} from "react-icons/fa";
-import { AiFillFileExcel } from "react-icons/ai";
 
 export default function ProductTabs() {
   const [value, setValue] = React.useState("1");

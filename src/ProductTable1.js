@@ -7,7 +7,6 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import Toolbar from "@mui/material/Toolbar";
@@ -16,12 +15,9 @@ import Paper from "@mui/material/Paper";
 import Checkbox from "@mui/material/Checkbox";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Switch from "@mui/material/Switch";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { visuallyHidden } from "@mui/utils";
-import { Grid, ButtonGroup, Button, Container } from "@mui/material";
-import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
+import { Grid, Button } from "@mui/material";
 import "./App.css";
 import "jquery/dist/jquery.min.js";
 import "datatables.net-dt/js/dataTables.dataTables";
@@ -30,14 +26,7 @@ import $ from "jquery";
 import CustomizedMenus from "./Dropdown";
 import "./styles.css";
 import Avatar from "@mui/material/Avatar";
-import {
-  FaFileCsv,
-  FaPrint,
-  FaFilePdf,
-  FaEdit,
-  FaEye,
-  FaTrash,
-} from "react-icons/fa";
+import { FaFileCsv, FaPrint, FaFilePdf } from "react-icons/fa";
 import { AiFillFileExcel } from "react-icons/ai";
 
 function createData(

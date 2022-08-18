@@ -10,17 +10,10 @@ import "jquery/dist/jquery.min.js";
 import "datatables.net-dt/js/dataTables.dataTables";
 import "datatables.net-dt/css/jquery.dataTables.min.css";
 import $ from "jquery";
-import { Button, Container, Grid } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import "./styles.css";
 import CustomizedDialogs from "./Modal";
-import {
-  FaFileCsv,
-  FaPrint,
-  FaFilePdf,
-  FaEdit,
-  FaEye,
-  FaTrash,
-} from "react-icons/fa";
+import { FaFileCsv, FaPrint, FaFilePdf } from "react-icons/fa";
 import { AiFillFileExcel } from "react-icons/ai";
 
 function createData(
