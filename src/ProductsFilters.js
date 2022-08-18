@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import MuiAccordion from "@mui/material/Accordion";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
@@ -9,7 +10,6 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { Grid, InputLabel, Box, Button } from "@mui/material";
-// import ProductTabs from "./ProductTabs";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import "./styles.css";
@@ -23,6 +23,7 @@ import AddIcon from "@mui/icons-material/Add";
 import EnhancedTable from "./ProductTable1";
 import CustomizedTables from "./ProductTable3";
 
+// Accordion style
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
 ))(({ theme }) => ({
@@ -35,10 +36,10 @@ const Accordion = styled((props) => (
   },
 }));
 
+// Accordion Header Style
 const AccordionSummary = styled((props) => <MuiAccordionSummary {...props} />)(
   ({ theme }) => ({
-    backgroundColor:
-      theme.palette.mode === "dark" ? "rgba(255, 255, 255, .05)" : "white",
+    backgroundColor: "white",
 
     flexDirection: "row-reverse",
     "& .MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
@@ -50,61 +51,70 @@ const AccordionSummary = styled((props) => <MuiAccordionSummary {...props} />)(
   })
 );
 
+// Accordion Body Style
 const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
   padding: theme.spacing(3),
   borderTop: "1px solid rgba(0, 0, 0, .125)",
 }));
 
+
 export default function CustomizedAccordions() {
-  const [expanded, setExpanded] = React.useState("panel1");
+  const [expanded, setExpanded] = useState("panel1");
 
   const handleChangePanel = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
 
-  const [ProductType, setProductType] = React.useState("");
+// Select-ProductType
+  const [ProductType, setProductType] = useState("");
 
   const handleChange1 = (event) => {
     setProductType(event.target.value);
   };
 
-  const [Category, setCategory] = React.useState("");
+// Select-Category
+  const [Category, setCategory] = useState("");
 
   const handleChange2 = (event) => {
     setCategory(event.target.value);
   };
 
-  const [Unit, setUnit] = React.useState("");
+// Select-Unit
+  const [Unit, setUnit] = useState("");
 
   const handleChange3 = (event) => {
     setUnit(event.target.value);
   };
 
-  const [Tax, setTax] = React.useState("");
+// Select-Tax
+  const [Tax, setTax] = useState("");
 
   const handleChange4 = (event) => {
     setTax(event.target.value);
   };
 
-  const [Brand, setBrand] = React.useState("");
+// Select-Brand
+  const [Brand, setBrand] = useState("");
 
   const handleChange5 = (event) => {
     setBrand(event.target.value);
   };
 
-  const [BusinessLocation, setBusinessLocation] = React.useState("");
+// Select-BusinessLocation
+  const [BusinessLocation, setBusinessLocation] = useState("");
 
   const handleChange6 = (event) => {
     setBusinessLocation(event.target.value);
   };
 
-  const [Status, setStatus] = React.useState("");
+// Select-Status
+  const [Status, setStatus] = useState("");
 
   const handleChange7 = (event) => {
     setStatus(event.target.value);
   };
 
-  const [TabValue, setTabValue] = React.useState("1");
+  const [TabValue, setTabValue] = useState("1");
 
   const handleTabChange = (event, newValue) => {
     setTabValue(newValue);
@@ -116,19 +126,16 @@ export default function CustomizedAccordions() {
         Products &nbsp;
         <span className="product_title_span">Manage your products </span>
       </Typography>
+
+      {/* *****Filters Grid***** */}
+
       <Grid>
         <Grid sx={{ pl: 3, pr: 3 }} fullWidth>
           <Accordion
             expanded={expanded === "panel1"}
             onChange={handleChangePanel("panel1")}
-            sx={{
-              margin: "10px",
-              bgcolor: "#fff",
-              height: "auto",
-              padding: "3px",
-              borderTop: "5px solid #7009AB;",
-              borderRadius: "10px",
-              boxShadow: "6px 6px 6px 6px #dedbdbae",
+            sx={{ margin: "10px", bgcolor: "#fff", height: "auto", padding: "3px", 
+            borderTop: "5px solid #7009AB;", borderRadius: "10px", boxShadow: "6px 6px 6px 6px #dedbdbae",
             }}
           >
             <AccordionSummary
@@ -141,11 +148,7 @@ export default function CustomizedAccordions() {
             </AccordionSummary>
             <AccordionDetails>
               <Grid container spacing={2}>
-                <Grid
-                  item
-                  md={3}
-                  sm={6}
-                  xs={10}
+                <Grid  item  md={3}  sm={6}  xs={10}
                   sx={{
                     "& .MuiOutlinedInput-notchedOutline": {
                       border: "1px solid #B97DF0",
@@ -181,11 +184,7 @@ export default function CustomizedAccordions() {
                   </Typography>
                 </Grid>
 
-                <Grid
-                  item
-                  md={3}
-                  sm={6}
-                  xs={10}
+                <Grid  item  md={3}  sm={6}  xs={10}
                   sx={{
                     "& .MuiOutlinedInput-notchedOutline": {
                       border: "1px solid #B97DF0",
@@ -215,11 +214,7 @@ export default function CustomizedAccordions() {
                   </Typography>
                 </Grid>
 
-                <Grid
-                  item
-                  md={3}
-                  sm={6}
-                  xs={10}
+                <Grid  item  md={3}  sm={6}  xs={10}
                   sx={{
                     "& .MuiOutlinedInput-notchedOutline": {
                       border: "1px solid #B97DF0",
@@ -250,11 +245,7 @@ export default function CustomizedAccordions() {
                   </Typography>
                 </Grid>
 
-                <Grid
-                  item
-                  md={3}
-                  sm={6}
-                  xs={10}
+                <Grid  item  md={3}  sm={6}  xs={10}
                   sx={{
                     "& .MuiOutlinedInput-notchedOutline": {
                       border: "1px solid #B97DF0",
@@ -287,11 +278,7 @@ export default function CustomizedAccordions() {
                   </Typography>
                 </Grid>
 
-                <Grid
-                  item
-                  md={3}
-                  sm={6}
-                  xs={10}
+                <Grid  item  md={3}  sm={6}  xs={10}
                   sx={{
                     "& .MuiOutlinedInput-notchedOutline": {
                       border: "1px solid #B97DF0",
@@ -322,11 +309,7 @@ export default function CustomizedAccordions() {
                   </Typography>
                 </Grid>
 
-                <Grid
-                  item
-                  md={3}
-                  sm={6}
-                  xs={10}
+                <Grid  item  md={3}  sm={6}  xs={10}
                   sx={{
                     "& .MuiOutlinedInput-notchedOutline": {
                       border: "1px solid #B97DF0",
@@ -362,11 +345,7 @@ export default function CustomizedAccordions() {
                     </FormControl>
                   </Typography>
                 </Grid>
-                <Grid
-                  item
-                  md={3}
-                  sm={6}
-                  xs={10}
+                <Grid  item  md={3}  sm={6}  xs={10}
                   sx={{
                     "& .MuiOutlinedInput-notchedOutline": {
                       border: "1px solid #B97DF0",
@@ -415,6 +394,9 @@ export default function CustomizedAccordions() {
           </Accordion>
         </Grid>
       </Grid>
+
+      {/* ********Tabs Grid******** */}
+
       <div>
       <Grid
         sx={{

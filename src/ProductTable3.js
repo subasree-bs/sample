@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -12,7 +13,6 @@ import "datatables.net-dt/css/jquery.dataTables.min.css";
 import $ from "jquery";
 import { Button, Container, Grid } from "@mui/material";
 import "./styles.css";
-// import CustomizedDialogs from "./Modal";
 import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -138,7 +138,7 @@ export default function CustomizedTables() {
     }, 1000);
   });
 
-  const [ModalOpen, setModalOpen] = React.useState(false);
+  const [ModalOpen, setModalOpen] = useState(false);
 
   const handleClickModalOpen = () => {
     setModalOpen(true);
