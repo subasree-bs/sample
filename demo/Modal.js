@@ -8,6 +8,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
+// import Typography from "@mui/material/Typography";
 import { Table, TableCell, TableRow } from "@mui/material";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -49,29 +50,29 @@ BootstrapDialogTitle.propTypes = {
 };
 
 export default function CustomizedDialogs() {
-  const [open, setOpen] = React.useState(false);
+  const [ModalOpen, setModalOpen] = React.useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  const handleClickModalOpen = () => {
+    setModalOpen(true);
   };
-  const handleClose = () => {
-    setOpen(false);
+  const handleModalClose = () => {
+    setModalOpen(false);
   };
 
   return (
     <div>
       <Button
         variant="outlined"
-        onClick={handleClickOpen}
+        onClick={handleClickModalOpen}
         size="small"
         sx={{ fontSize: 10, borderColor: "#7009AB", color: "#7009AB" }}
       >
         View group prices
       </Button>
       <BootstrapDialog
-        onClose={handleClose}
+        onClose={handleModalClose}
         aria-labelledby="customized-dialog-title"
-        open={open}
+        open={ModalOpen}
         sx={{
           "& .MuiDialog-paper": {
             marginTop: "-330px",
@@ -81,7 +82,7 @@ export default function CustomizedDialogs() {
       >
         <BootstrapDialogTitle
           id="customized-dialog-title"
-          onClose={handleClose}
+          onClose={handleModalClose}
           sx={{ minWidth: 600 }}
         >
           Product
@@ -102,7 +103,7 @@ export default function CustomizedDialogs() {
         <DialogActions>
           <Button
             autoFocus
-            onClick={handleClose}
+            onClick={handleModalClose}
             variant="outlined"
             sx={{
               backgroundColor: "#f4f4f4",

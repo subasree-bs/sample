@@ -8,15 +8,24 @@ import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
-import { Grid, Button } from "@mui/material";
+import { Grid, Button, Container } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import "./styles.css";
+import {
+  FaFileCsv,
+  FaPrint,
+  FaFilePdf,
+  FaEdit,
+  FaEye,
+  FaTrash,
+} from "react-icons/fa";
+import { AiFillFileExcel } from "react-icons/ai";
 
 export default function ProductTabs() {
-  const [value, setValue] = React.useState("1");
+  const [TabValue, setTabValue] = React.useState("1");
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  const handleTabChange = (event, newValue) => {
+    setTabValue(newValue);
   };
 
   return (
@@ -32,9 +41,9 @@ export default function ProductTabs() {
       }}
     >
       <Box sx={{ width: "100%", typography: "body1" }}>
-        <TabContext value={value}>
+        <TabContext value={TabValue}>
           <Box>
-            <TabList onChange={handleChange} aria-label="lab API tabs example">
+            <TabList onChange={handleTabChange} aria-label="lab API tabs example">
               <Tab
                 icon={<ViewInArIcon />}
                 iconPosition="start"

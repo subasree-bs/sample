@@ -8,11 +8,20 @@ import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { Grid, InputLabel, Box } from "@mui/material";
-import ProductTabs from "./ProductTabs";
+import { Grid, InputLabel, Box, Button } from "@mui/material";
+// import ProductTabs from "./ProductTabs";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import "./styles.css";
+import Tab from "@mui/material/Tab";
+import TabContext from "@mui/lab/TabContext";
+import TabList from "@mui/lab/TabList";
+import TabPanel from "@mui/lab/TabPanel";
+import HourglassFullIcon from "@mui/icons-material/HourglassFull";
+import ViewInArIcon from "@mui/icons-material/ViewInAr";
+import AddIcon from "@mui/icons-material/Add";
+import EnhancedTable from "./ProductTable1";
+import CustomizedTables from "./ProductTable3";
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -93,6 +102,12 @@ export default function CustomizedAccordions() {
 
   const handleChange7 = (event) => {
     setStatus(event.target.value);
+  };
+
+  const [TabValue, setTabValue] = React.useState("1");
+
+  const handleTabChange = (event, newValue) => {
+    setTabValue(newValue);
   };
 
   return (
@@ -401,7 +416,87 @@ export default function CustomizedAccordions() {
         </Grid>
       </Grid>
       <div>
-        <ProductTabs />
+      <Grid
+        sx={{
+          margin: "33px",
+          bgcolor: "#fff",
+          height: "auto",
+          padding: "1px",
+          borderRadius: "10px",
+          borderTop: "5px solid #7009AB;",
+          boxShadow: "6px 6px 6px 6px #dedbdbae",
+        }}
+      >
+        <Box sx={{ width: "100%", typography: "body1" }}>
+          <TabContext value={TabValue}>
+            <Box>
+              <TabList onChange={handleTabChange} aria-label="Tabs">
+                <Tab
+                  icon={<ViewInArIcon />}
+                  iconPosition="start"
+                  label="All Products"
+                  value="1"
+                  sx={{
+                    color: "#7009AB",
+                    "&.MuiTabs-indicator": {
+                      backgroundColor: "#7009AB",
+                      borderColor: "#7009AB",
+                    },
+                    "&.Mui-selected": {
+                      color: "#7009AB",
+                      borderColor: "#7009AB",
+                      backgroundColor: "#efecec",
+                    },
+                  }}
+                />
+                <Tab
+                  icon={<HourglassFullIcon />}
+                  iconPosition="start"
+                  label="Stock Report"
+                  value="2"
+                  sx={{
+                    color: "#7009AB",
+                    "&.MuiTabs-indicator": {
+                      backgroundColor: "#7009AB",
+                      borderColor: "#7009AB",
+                    },
+                    "&.Mui-selected": {
+                      color: "#7009AB",
+                      borderColor: "#7009AB",
+                      backgroundColor: "#efecec",
+                    },
+                  }}
+                />
+              </TabList>
+            </Box>
+            <TabPanel value="1" sx={{ padding: 0, pt: 3 }}>
+              <div>
+                <br />
+                <Button
+                  className="add_btn"
+                  variant="contained"
+                  sx={{
+                    float: "right",
+                    width: 70,
+                    mr: 1,
+                    backgroundColor: "#7009AB",
+                    mt: -5,
+                  }}
+                >
+                  <AddIcon />
+                  Add
+                </Button>
+                <EnhancedTable />
+              </div>
+            </TabPanel>
+            <TabPanel value="2" sx={{ padding: 0, pt: 3 }}>
+              <div>
+                <CustomizedTables />
+              </div>
+            </TabPanel>
+          </TabContext>
+        </Box>
+      </Grid>
       </div>
     </Box>
   );

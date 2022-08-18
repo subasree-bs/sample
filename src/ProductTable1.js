@@ -1,187 +1,89 @@
 import * as React from "react";
 import PropTypes from "prop-types";
-import { alpha } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import TableSortLabel from "@mui/material/TableSortLabel";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
-import Checkbox from "@mui/material/Checkbox";
-import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
+import { alpha, styled } from "@mui/material/styles";
+import {Box,Table,TableBody,TableCell,TableContainer,TableHead,TablePagination,
+  TableRow,TableSortLabel, Grid, ButtonGroup, Button, Container,Toolbar,
+  Typography,Paper,Checkbox,IconButton,Tooltip,FormControlLabel,Switch,
+  Avatar,Menu,MenuItem,Divider,} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
 import { visuallyHidden } from "@mui/utils";
-import { Grid, Button } from "@mui/material";
-import "./App.css";
 import "jquery/dist/jquery.min.js";
 import "datatables.net-dt/js/dataTables.dataTables";
 import "datatables.net-dt/css/jquery.dataTables.min.css";
 import $ from "jquery";
-import CustomizedMenus from "./Dropdown";
+// import CustomizedMenus from "./Dropdown";
 import "./styles.css";
-import Avatar from "@mui/material/Avatar";
-import { FaFileCsv, FaPrint, FaFilePdf } from "react-icons/fa";
+import { FaFileCsv, FaPrint, FaFilePdf, FaEdit, FaEye, FaTrash,
+   FaDatabase, FaHistory, FaCopy, FaBarcode,} from "react-icons/fa";
 import { AiFillFileExcel } from "react-icons/ai";
 
-function createData(
-  productimage,
-  action,
-  product,
-  businesslocation,
-  upprice,
-  sprice,
-  currentstock,
-  producttype,
-  category,
-  brand,
-  tax,
-  sku,
-  cf1,
-  cf2,
-  cf3,
-  cf4
-) {
-  return {
-    productimage,
-    action,
-    product,
-    businesslocation,
-    upprice,
-    sprice,
-    currentstock,
-    producttype,
-    category,
-    brand,
-    tax,
-    sku,
-    cf1,
-    cf2,
-    cf3,
-    cf4,
+const StyledMenu = styled((props) => (
+  <Menu
+    elevation={0}
+    anchorOrigin={{
+      vertical: "bottom",
+      horizontal: "right",
+    }}
+    transformOrigin={{
+      vertical: "top",
+      horizontal: "right",
+    }}
+    {...props}
+  />
+))(({ theme }) => ({
+  "& .MuiPaper-root": {
+    borderRadius: 6,
+    marginTop: theme.spacing(1),
+    minWidth: 150,
+    color:
+      theme.palette.mode === "light"
+        ? "rgb(55, 65, 81)"
+        : theme.palette.grey[300],
+    boxShadow:
+      "rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px",
+    "& .MuiMenu-list": {
+      padding: "4px 0",
+    },
+    "& .MuiMenuItem-root": {
+      fontSize: 14,
+      "& .MuiSvgIcon-root": {
+        fontSize: 15,
+        color: theme.palette.text.secondary,
+        marginRight: theme.spacing(1.5),
+      },
+      "&:active": {
+        backgroundColor: alpha(
+          theme.palette.primary.main,
+          theme.palette.action.selectedOpacity
+        ),
+      },
+    },
+  },
+}));
+
+function createData( productimage, action, product, businesslocation, upprice, 
+  sprice, currentstock, producttype, category, brand, tax, sku, cf1, cf2, cf3, cf4)
+   {
+  return { productimage, action, product, businesslocation, upprice, 
+    sprice, currentstock, producttype, category, brand, tax, sku, cf1, cf2, cf3, cf4,
   };
 }
 
 const rows = [
-  // createData(
-  //   "dfgh",
-  //   <CustomizedMenus />,
-  //   "Cupcake1",
-  //   "Cupcake2",
-  //   "Cupcake3",
-  //   "Cupcake4",
-  //   "Cupcake5",
-  //   "Cupcake6",
-  //   "Cupcake7",
-  //   "Cupcake8",
-  //   "Cupcake9",
-  //   67,
-  //   4.3,
-  //   69,
-  //   46,
-  //   78,
-  //   89
-  // ),
-  // createData(
-  //   "dfgh",
-  //   <CustomizedMenus />,
-  //   "Cupcake1",
-  //   "Cupcake2",
-  //   "Cupcake3",
-  //   "Cupcake4",
-  //   "Cupcake5",
-  //   "Cupcake6",
-  //   "Cupcake7",
-  //   "Cupcake8",
-  //   "Cupcake9",
-  //   77,
-  //   7.3,
-  //   79,
-  //   76,
-  //   78,
-  //   79
-  // ),
-  // createData(
-  //   "dfgh",
-  //   <CustomizedMenus />,
-  //   "Cupcake1",
-  //   "Cupcake2",
-  //   "Cupcake3",
-  //   "Cupcake4",
-  //   "Cupcake5",
-  //   "Cupcake6",
-  //   "Cupcake7",
-  //   "Cupcake8",
-  //   "Cupcake9",
-  //   27,
-  //   2.3,
-  //   29,
-  //   26,
-  //   28,
-  //   29
-  // ),
-  // createData(
-  //   "dfgh",
-  //   <CustomizedMenus />,
-  //   "Cupcake1",
-  //   "Cupcake2",
-  //   "Cupcake3",
-  //   "Cupcake4",
-  //   "Cupcake5",
-  //   "Cupcake6",
-  //   "Cupcake7",
-  //   "Cupcake8",
-  //   "Cupcake9",
-  //   47,
-  //   4.3,
-  //   49,
-  //   46,
-  //   48,
-  //   49
-  // ),
-  // createData(
-  //   "dfgh",
-  //   <CustomizedMenus />,
-  //   "Cake1",
-  //   "Cake2",
-  //   "Cake3",
-  //   "Cake4",
-  //   "Cake5",
-  //   "Cake6",
-  //   "Cake7",
-  //   "Cake8",
-  //   "Cake9",
-  //   97,
-  //   9.3,
-  //   99,
-  //   96,
-  //   98,
-  //   99
-  // ),
-  // createData(
-  //   "dfgh",
-  //   <CustomizedMenus />,
-  //   "Cake1",
-  //   "Cake2",
-  //   "Cake3",
-  //   "Cake4",
-  //   "Cake5",
-  //   "Cake6",
-  //   "Cake7",
-  //   "Cake8",
-  //   "Cake9",
-  //   37,
-  //   3.3,
-  //   39,
-  //   36,
-  //   38,
-  //   39
-  // ),
+  createData( "dfgh", "", "Cupcake1", "Cupcake2", "Cupcake3", "Cupcake4", "Cupcake5", 
+  "Cupcake6", "Cupcake7", "Cupcake8", "Cupcake9", 67, 4.3, 69, 46, 78, 89),
+  createData( "dfgh", "", "Cupcake1", "Cupcake2", "Cupcake3", "Cupcake4", "Cupcake5", 
+  "Cupcake6", "Cupcake7", "Cupcake8", "Cupcake9", 77, 7.3, 79, 76, 78, 79),
+  createData( "dfgh", "", "Cupcake1", "Cupcake2", "Cupcake3", "Cupcake4", "Cupcake5", 
+  "Cupcake6", "Cupcake7", "Cupcake8", "Cupcake9", 27, 2.3, 29, 26, 28, 29),
+  createData( "dfgh", "", "Cupcake1", "Cupcake2", "Cupcake3", "Cupcake4", "Cupcake5", 
+  "Cupcake6", "Cupcake7", "Cupcake8", "Cupcake9", 47, 4.3, 49, 46, 48, 49),
+  createData( "dfgh", "", "Cake1", "Cake2", "Cake3", "Cake4", "Cake5", "Cake6", "Cake7", 
+  "Cake8", "Cake9", 97, 9.3, 99, 96, 98, 99),
+  createData( "dfgh", "", "Cake1", "Cake2", "Cake3", "Cake4", "Cake5", "Cake6", "Cake7", 
+  "Cake8", "Cake9", 37, 3.3, 39, 36, 38, 39),
 ];
 
 function descendingComparator(a, b, orderBy) {
@@ -199,6 +101,7 @@ function getComparator(order, orderBy) {
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
+
 
 function stableSort(array, comparator) {
   const stabilizedThis = array.map((el, index) => [el, index]);
@@ -420,7 +323,9 @@ const EnhancedTableToolbar = (props) => {
           </IconButton>
         </Tooltip>
       ) : (
-        <Tooltip title="Filter list"></Tooltip>
+        <Tooltip title="Filter list">
+          <IconButton></IconButton>
+        </Tooltip>
       )}
     </Toolbar>
   );
@@ -485,6 +390,18 @@ export default function EnhancedTable() {
 
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+
+
+    const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick_action = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+
 
   $(document).ready(function () {
     setTimeout(function () {
@@ -579,7 +496,57 @@ export default function EnhancedTable() {
                           variant="square"
                         ></Avatar>
                       </TableCell>
-                      <TableCell align="center">{row.action}</TableCell>
+                      <TableCell align="center">
+                        {/* {row.action} */}
+                        <Button
+                          id="demo-customized-button"
+                          aria-controls={open ? "demo-customized-menu" : undefined}
+                          aria-haspopup="true"
+                          aria-expanded={open ? "true" : undefined}
+                          variant="contained"
+                          disableElevation
+                          onClick={handleClick_action}
+                          endIcon={<KeyboardArrowDownIcon />}
+                          size="small"
+                          xs={{ backgroundColor: "#000000" }}
+                          className="dropdown_actions"
+                        >
+                          Actions
+                        </Button>
+                        <StyledMenu
+                          id="demo-customized-menu"
+                          MenuListProps={{
+                            "aria-labelledby": "demo-customized-button",
+                          }}
+                          anchorEl={anchorEl}
+                          open={open}
+                          onClose={handleClose}
+                        >
+                          <MenuItem onClick={handleClose} disableRipple>
+                            <FaBarcode /> &nbsp; &nbsp; &nbsp;Labels
+                          </MenuItem>
+                          <MenuItem onClick={handleClose} disableRipple>
+                            <FaEye />
+                            &nbsp; &nbsp; &nbsp; View
+                          </MenuItem>
+                          <MenuItem onClick={handleClose} disableRipple>
+                            <FaEdit /> &nbsp;&nbsp; &nbsp; Edit
+                          </MenuItem>
+                          <MenuItem onClick={handleClose} disableRipple>
+                            <FaTrash /> &nbsp;&nbsp; &nbsp; Delete
+                          </MenuItem>
+                          <Divider sx={{ my: 2 }} />
+                          <MenuItem onClick={handleClose} disableRipple>
+                            <FaDatabase /> &nbsp;&nbsp; &nbsp; Add or edit opening stock
+                          </MenuItem>
+                          <MenuItem onClick={handleClose} disableRipple>
+                            <FaHistory /> &nbsp; &nbsp; &nbsp;Product stock history
+                          </MenuItem>
+                          <MenuItem onClick={handleClose} disableRipple>
+                            <FaCopy /> &nbsp; &nbsp; &nbsp;Duplicate Product
+                          </MenuItem>
+                        </StyledMenu>
+                      </TableCell>
                       <TableCell align="center">{row.product}</TableCell>
                       <TableCell align="center">
                         {row.businesslocation}
