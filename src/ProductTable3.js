@@ -95,7 +95,6 @@ export default function CustomizedTables() {
       <Grid
         container
         sx={{
-          // marginTop: "30px",
           justifyContent: "center",
         }}
       >
@@ -158,10 +157,7 @@ export default function CustomizedTables() {
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <TableRow
-              key={row.sr_sku}
-              //   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-            >
+            <TableRow key={row.sr_sku}>
               <TableCell component="th" scope="row">
                 {row.sr_sku}
               </TableCell>

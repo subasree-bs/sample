@@ -2,7 +2,6 @@ import React from "react";
 import HourglassFullIcon from "@mui/icons-material/HourglassFull";
 import ViewInArIcon from "@mui/icons-material/ViewInAr";
 import EnhancedTable from "./ProductTable1";
-// import EnhancedTable2 from "./ProductTable2";
 import CustomizedTables from "./ProductTable3";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
@@ -100,65 +99,11 @@ export default function ProductTabs() {
                 <AddIcon />
                 Add
               </Button>
-              {/* <Grid
-                container
-                sx={{
-                  marginTop: "20px",
-                  mb: 1,
-                  justifyContent: "center",
-                }}
-              >
-                <Grid>
-                  <Button className="users_btngrp">
-                    <FaFileCsv />
-                    &ensp;Export to CSV
-                  </Button>
-                  <Button className="users_btngrp">
-                    <AiFillFileExcel />
-                    &ensp;Export to Excel
-                  </Button>
-                  <Button className="users_btngrp">
-                    <FaPrint />
-                    &ensp;Print
-                  </Button>
-                  <Button className="users_btngrp">
-                    <FaFilePdf />
-                    &ensp;Export to PDF
-                  </Button>
-                </Grid>
-              </Grid> */}
-
               <EnhancedTable />
             </div>
           </TabPanel>
           <TabPanel value="2" sx={{ padding: 0, pt: 3 }}>
             <div>
-              {/* <Grid
-                container
-                sx={{
-                  marginTop: "20px",
-                  justifyContent: "center",
-                }}
-              >
-                <Grid>
-                  <Button className="users_btngrp">
-                    <FaFileCsv />
-                    &ensp;Export to CSV
-                  </Button>
-                  <Button className="users_btngrp">
-                    <AiFillFileExcel />
-                    &ensp;Export to Excel
-                  </Button>
-                  <Button className="users_btngrp">
-                    <FaPrint />
-                    &ensp;Print
-                  </Button>
-                  <Button className="users_btngrp">
-                    <FaFilePdf />
-                    &ensp;Export to PDF
-                  </Button>
-                </Grid>
-              </Grid> */}
               <CustomizedTables />
             </div>
           </TabPanel>

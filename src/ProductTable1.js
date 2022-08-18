@@ -357,7 +357,6 @@ function EnhancedTableHead(props) {
               color: "black",
             }}
             key={headCell.id}
-            // align={headCell.numeric ? "right" : "left"}
             align="center"
             padding={headCell.disablePadding ? "none" : "normal"}
             sortDirection={orderBy === headCell.id ? order : false}
@@ -432,9 +431,7 @@ const EnhancedTableToolbar = (props) => {
           </IconButton>
         </Tooltip>
       ) : (
-        <Tooltip title="Filter list">
-          <IconButton>{/* <FilterListIcon /> */}</IconButton>
-        </Tooltip>
+        <Tooltip title="Filter list"></Tooltip>
       )}
     </Toolbar>
   );
@@ -449,7 +446,6 @@ export default function EnhancedTable() {
   const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
-  // const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(25);
 
   const handleRequestSort = (event, property) => {
@@ -498,7 +494,6 @@ export default function EnhancedTable() {
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
-  // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
@@ -521,8 +516,6 @@ export default function EnhancedTable() {
           <Grid
             container
             sx={{
-              // marginTop: "20px",
-              // mb: 1,
               justifyContent: "center",
             }}
           >
