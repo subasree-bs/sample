@@ -4,14 +4,12 @@ import { styled, alpha } from "@mui/material/styles";
 import MuiAccordion from "@mui/material/Accordion";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
-import Typography from "@mui/material/Typography";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
-import {Select,Checkbox,FormControl,MenuItem, Grid, InputLabel, Box, Button,
+import { Typography,Container,Select,Checkbox,FormControl,MenuItem, Grid, InputLabel, Box, Button,
    Menu,TableSortLabel,Tooltip,Avatar,Divider,Toolbar,Table,TableBody,
    TableCell,TableContainer,TableHead,TableRow,Paper,Dialog,DialogTitle,
-   DialogContent,DialogActions} from "@mui/material";
+   DialogContent,DialogActions,tableCellClasses} from "@mui/material";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import "./styles.css";
 import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
@@ -32,8 +30,29 @@ import { FaFileCsv, FaPrint, FaFilePdf, FaEdit, FaEye, FaTrash,
   FaDatabase, FaHistory, FaCopy, FaBarcode,} from "react-icons/fa";
 import { AiFillFileExcel } from "react-icons/ai";
 import { visuallyHidden } from "@mui/utils";
+import {commonstyle} from "./Commonstyle";
 
 
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.white,
+    color: theme.palette.common.black,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+}));
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  '&:nth-of-type(odd)': {
+    backgroundColor: theme.palette.action.hover,
+  },
+  // hide last border
+  '&:last-child td, &:last-child th': {
+    border: 0,
+  },
+}));
+
+//Actions Dropdown Button - List 
 const StyledMenu = styled((props) => (
   <Menu
     elevation={0}
@@ -78,6 +97,7 @@ const StyledMenu = styled((props) => (
   },
 }));
 
+//All Products Table createData function
 function createData( productimage, action, product, businesslocation, upprice, 
   sprice, currentstock, producttype, category, brand, tax, sku, cf1, cf2, cf3, cf4)
    {
@@ -86,18 +106,13 @@ function createData( productimage, action, product, businesslocation, upprice,
   };
 }
 
+//All Products Table rows 
 const rows = [
   createData( "dfgh", "", "Cupcake1", "Cupcake2", "Cupcake3", "Cupcake4", "Cupcake5", 
   "Cupcake6", "Cupcake7", "Cupcake8", "Cupcake9", 67, 4.3, 69, 46, 78, 89),
-  createData( "dfgh", "", "Cupcake1", "Cupcake2", "Cupcake3", "Cupcake4", "Cupcake5", 
-  "Cupcake6", "Cupcake7", "Cupcake8", "Cupcake9", 77, 7.3, 79, 76, 78, 79),
-  createData( "dfgh", "", "Cupcake1", "Cupcake2", "Cupcake3", "Cupcake4", "Cupcake5", 
-  "Cupcake6", "Cupcake7", "Cupcake8", "Cupcake9", 27, 2.3, 29, 26, 28, 29),
-  createData( "dfgh", "", "Cupcake1", "Cupcake2", "Cupcake3", "Cupcake4", "Cupcake5", 
-  "Cupcake6", "Cupcake7", "Cupcake8", "Cupcake9", 47, 4.3, 49, 46, 48, 49),
-  createData( "dfgh", "", "Cake1", "Cake2", "Cake3", "Cake4", "Cake5", "Cake6", "Cake7", 
+  createData( "efgh", "", "Chocolate", "Cake2", "Cake3", "Cake4", "Cake5", "Cake6", "Cake7", 
   "Cake8", "Cake9", 97, 9.3, 99, 96, 98, 99),
-  createData( "dfgh", "", "Cake1", "Cake2", "Cake3", "Cake4", "Cake5", "Cake6", "Cake7", 
+  createData( "jfgh", "", "Cake1", "Cake2", "Cake3", "Cake4", "Cake5", "Cake6", "Cake7", 
   "Cake8", "Cake9", 37, 3.3, 39, 36, 38, 39),
 ];
 
@@ -117,7 +132,6 @@ function getComparator(order, orderBy) {
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
-
 function stableSort(array, comparator) {
   const stabilizedThis = array.map((el, index) => [el, index]);
   stabilizedThis.sort((a, b) => {
@@ -131,116 +145,28 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-  {
-    id: "productimage",
-    numeric: false,
-    disablePadding: true,
-    label: "",
-  },
-  {
-    id: "action",
-    numeric: false,
-    disablePadding: true,
-    label: "Action",
-  },
-  {
-    id: "product",
-    numeric: false,
-    disablePadding: false,
-    label: "Product",
-  },
-  {
-    id: "businesslocation",
-    numeric: false,
-    disablePadding: false,
-    label: "Business Location",
-  },
-  {
-    id: "upprice",
-    numeric: false,
-    disablePadding: false,
-    label: "Unit Purchase Price",
-  },
-  {
-    id: "sprice",
-    numeric: false,
-    disablePadding: false,
-    label: "Selling Price",
-  },
-  {
-    id: "currentstock",
-    numeric: false,
-    disablePadding: false,
-    label: "Current Stock",
-  },
-  {
-    id: "producttype",
-    numeric: false,
-    disablePadding: false,
-    label: "Product Type",
-  },
-  {
-    id: "category",
-    numeric: false,
-    disablePadding: false,
-    label: "Category",
-  },
-  {
-    id: "brand",
-    numeric: false,
-    disablePadding: false,
-    label: "Brand",
-  },
-  {
-    id: "tax",
-    numeric: false,
-    disablePadding: false,
-    label: "Tax",
-  },
-  {
-    id: "sku",
-    numeric: true,
-    disablePadding: false,
-    label: "SKU",
-  },
-  {
-    id: "cf1",
-    numeric: true,
-    disablePadding: false,
-    label: "Custom Field1",
-  },
-  {
-    id: "cf2",
-    numeric: true,
-    disablePadding: false,
-    label: "Custom Field2",
-  },
-  {
-    id: "cf3",
-    numeric: true,
-    disablePadding: false,
-    label: "Custom Field3",
-  },
-  {
-    id: "cf4",
-    numeric: true,
-    disablePadding: false,
-    label: "Custom Field4",
-  },
+  { id: "productimage", numeric: false, disablePadding: true, label: "", },
+  { id: "action", numeric: false, disablePadding: true, label: "Action", },
+  { id: "product", numeric: false, disablePadding: false, label: "Product", },
+  { id: "businesslocation", numeric: false, disablePadding: false, label: "Business Location", },
+  { id: "upprice", numeric: false, disablePadding: false, label: "Unit Purchase Price", },
+  { id: "sprice", numeric: false, disablePadding: false, label: "Selling Price", },
+  { id: "currentstock", numeric: false, disablePadding: false, label: "Current Stock", },
+  { id: "producttype", numeric: false, disablePadding: false, label: "Product Type", },
+  { id: "category", numeric: false, disablePadding: false, label: "Category", },
+  { id: "brand", numeric: false, disablePadding: false, label: "Brand", },
+  { id: "tax", numeric: false, disablePadding: false, label: "Tax", },
+  { id: "sku", numeric: true, disablePadding: false, label: "SKU", },
+  { id: "cf1", numeric: true, disablePadding: false, label: "Custom Field1", },
+  { id: "cf2", numeric: true, disablePadding: false, label: "Custom Field2", },
+  { id: "cf3", numeric: true, disablePadding: false, label: "Custom Field3", },
+  { id: "cf4", numeric: true, disablePadding: false, label: "Custom Field4", },
 ];
 
+// All Products Table Head function
 function EnhancedTableHead(props) {
-  const {
-    onSelectAllClick,
-    order,
-    orderBy,
-    numSelected,
-    rowCount,
-    onRequestSort,
-  } = props;
-  const createSortHandler = (property) => (event) => {
-    onRequestSort(event, property);
-  };
+  const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort,} = props;
+  const createSortHandler = (property) => (event) => {onRequestSort(event, property); };
 
   return (
     <TableHead>
@@ -364,34 +290,11 @@ function createData2( sr_sku, sr_product, sr_location, sr_unitprice, sr_currents
 }
 
 const rows2 = [
-  createData2(
-    "Frozen yoghurt",
-    159,
-    6.0,
-    24,
-    4.0,
-    "Frozen yoghurt",
-    159,
-    6.0,
-    24,
-    4.0,
-    78
-  ),
-  createData2(
-    "Ice cream sandwich",
-    237,
-    9.0,
-    37,
-    4.3,
-    "Ice cream sandwich",
-    237,
-    9.0,
-    37,
-    4.3,
-    79
-  ),
+  createData2( "Frozen yoghurt", 159, 6.0, 24, 4.0, "Frozen yoghurt", 159, 6.0, 24, 4.0, 78 ),
+  createData2( "Ice cream sandwich", 237, 9.0, 37, 4.3, "Ice cream sandwich", 237, 9.0, 37, 4.3, 79 ),
 ];
 
+//View Group Prices Modal Tags
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
     padding: theme.spacing(2),
@@ -411,12 +314,7 @@ const BootstrapDialogTitle = (props) => {
         <IconButton
           aria-label="close"
           onClick={onClose}
-          sx={{
-            position: "absolute",
-            right: 8,
-            top: 8,
-            color: (theme) => theme.palette.grey[500],
-          }}
+          sx={{ position: "absolute", right: 8, top: 8, color: (theme) => theme.palette.grey[500], }}
         >
           <CloseIcon />
         </IconButton>
@@ -436,6 +334,7 @@ const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
 ))(({ theme }) => ({
   border: `1px solid ${theme.palette.divider}`,
+  padding: 0,
   "&:not(:last-child)": {
     borderBottom: 0,
   },
@@ -470,7 +369,7 @@ export default function CustomizedAccordions() {
 
 // Table 1 - All Products
   const [order, setOrder] = useState("asc");
-  const [orderBy, setOrderBy] = useState("calories");
+  const [orderBy, setOrderBy] = useState("product");
   const [selected, setSelected] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(25);
@@ -483,19 +382,19 @@ export default function CustomizedAccordions() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelected = rows.map((n) => n.productimage);
+      const newSelected = rows.map((n) => n.product);
       setSelected(newSelected);
       return;
     }
     setSelected([]);
   };
 
-  const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
+  const handleClick = (event, product) => {
+    const selectedIndex = selected.indexOf(product);
     let newSelected = [];
 
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
+      newSelected = newSelected.concat(selected, product);
     } else if (selectedIndex === 0) {
       newSelected = newSelected.concat(selected.slice(1));
     } else if (selectedIndex === selected.length - 1) {
@@ -515,17 +414,15 @@ export default function CustomizedAccordions() {
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
+    setRowsPerPage(parseInt(event.target.value, 25));
     setPage(0);
   };
 
-  const isSelected = (name) => selected.indexOf(name) !== -1;
+  const isSelected = (product) => selected.indexOf(product) !== -1;
 
-  const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
-
-    const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick_action = (event) => {
     setAnchorEl(event.currentTarget);
@@ -535,7 +432,7 @@ export default function CustomizedAccordions() {
   };
 
 
-
+// Table 1 - Plugin
   $(document).ready(function () {
     setTimeout(function () {
       $("#example").DataTable({
@@ -610,6 +507,7 @@ export default function CustomizedAccordions() {
     setTabValue(newValue);
   };
 
+// Table 2 - Plugin
   $(document).ready(function () {
     setTimeout(function () {
       $("#example2").DataTable({
@@ -620,6 +518,7 @@ export default function CustomizedAccordions() {
     }, 1000);
   });
 
+// Stock Report Table Modal
   const [ModalOpen, setModalOpen] = useState(false);
 
   const handleClickModalOpen = () => {
@@ -631,21 +530,25 @@ export default function CustomizedAccordions() {
 
   return (
     <Box>
-      <Typography variant="h5" sx={{ p: 3 }}>
-        Products &nbsp;
-        <span className="product_title_span">Manage your products </span>
-      </Typography>
+      <Container sx={{ paddingTop: '10px' }}>
+                <Grid display="flex">
+                    <Typography variant="h5" >Products</Typography>
+                    <Typography variant='body2' sx={{ marginLeft: '10px', marginTop: '10px' }}>
+                      Manage your products</Typography>
+                </Grid>
+            </Container>
+            <br />
 
       {/* *****Filters Grid***** */}
 
+    <Container>
       <Grid>
-        <Grid sx={{ pl: 3, pr: 3 }} fullWidth>
+        <Grid  fullWidth sx={{ '& .MuiGrid-root':{
+          paddingRight: 0,paddingLeft: 0,        }}}>
           <Accordion
             expanded={expanded === "panel1"}
             onChange={handleChangePanel("panel1")}
-            sx={{ margin: "10px", bgcolor: "#fff", height: "auto", padding: "3px", 
-            borderTop: "5px solid #7009AB;", borderRadius: "10px", boxShadow: "6px 6px 6px 6px #dedbdbae",
-            }}
+            sx={ commonstyle.container}
           >
             <AccordionSummary
               aria-controls="panel1d-content"
@@ -657,22 +560,9 @@ export default function CustomizedAccordions() {
             </AccordionSummary>
             <AccordionDetails>
               <Grid container spacing={2}>
-                <Grid  item  md={3}  sm={6}  xs={10}
-                  sx={{
-                    "& .MuiOutlinedInput-notchedOutline": {
-                      border: "1px solid #B97DF0",
-                    },
-                  }}
-                >
+              <Grid  item  md={3}  sm={6}  xs={10} sx={commonstyle.select_input} >
                   <Typography>
-                    <FormControl
-                      sx={{
-                        m: 1,
-                        borderRadius: 2,
-                      }}
-                      size="small"
-                      fullWidth
-                    >
+                  <FormControl sx={ commonstyle.productlist_select_formcontrol } size="small" fullWidth >
                       <InputLabel id="demo-select-small">
                         Product Type
                       </InputLabel>
@@ -693,22 +583,9 @@ export default function CustomizedAccordions() {
                   </Typography>
                 </Grid>
 
-                <Grid  item  md={3}  sm={6}  xs={10}
-                  sx={{
-                    "& .MuiOutlinedInput-notchedOutline": {
-                      border: "1px solid #B97DF0",
-                    },
-                  }}
-                >
+                <Grid  item  md={3}  sm={6}  xs={10} sx={commonstyle.select_input} >
                   <Typography>
-                    <FormControl
-                      sx={{
-                        m: 1,
-                        borderRadius: 2,
-                      }}
-                      size="small"
-                      fullWidth
-                    >
+                  <FormControl sx={ commonstyle.productlist_select_formcontrol } size="small" fullWidth >
                       <InputLabel id="demo-select-small">Category</InputLabel>
                       <Select
                         labelId="demo-select-small"
@@ -723,22 +600,9 @@ export default function CustomizedAccordions() {
                   </Typography>
                 </Grid>
 
-                <Grid  item  md={3}  sm={6}  xs={10}
-                  sx={{
-                    "& .MuiOutlinedInput-notchedOutline": {
-                      border: "1px solid #B97DF0",
-                    },
-                  }}
-                >
+                <Grid  item  md={3}  sm={6}  xs={10} sx={commonstyle.select_input} >
                   <Typography>
-                    <FormControl
-                      sx={{
-                        m: 1,
-                        borderRadius: 2,
-                      }}
-                      size="small"
-                      fullWidth
-                    >
+                  <FormControl sx={ commonstyle.productlist_select_formcontrol } size="small" fullWidth >
                       <InputLabel id="demo-select-small">Unit</InputLabel>
                       <Select
                         labelId="demo-select-small"
@@ -754,22 +618,9 @@ export default function CustomizedAccordions() {
                   </Typography>
                 </Grid>
 
-                <Grid  item  md={3}  sm={6}  xs={10}
-                  sx={{
-                    "& .MuiOutlinedInput-notchedOutline": {
-                      border: "1px solid #B97DF0",
-                    },
-                  }}
-                >
+                <Grid  item  md={3}  sm={6}  xs={10} sx={commonstyle.select_input} >
                   <Typography>
-                    <FormControl
-                      sx={{
-                        m: 1,
-                        borderRadius: 2,
-                      }}
-                      size="small"
-                      fullWidth
-                    >
+                  <FormControl sx={ commonstyle.productlist_select_formcontrol } size="small" fullWidth >
                       <InputLabel id="demo-select-small">Tax</InputLabel>
                       <Select
                         labelId="demo-select-small"
@@ -787,22 +638,9 @@ export default function CustomizedAccordions() {
                   </Typography>
                 </Grid>
 
-                <Grid  item  md={3}  sm={6}  xs={10}
-                  sx={{
-                    "& .MuiOutlinedInput-notchedOutline": {
-                      border: "1px solid #B97DF0",
-                    },
-                  }}
-                >
+                <Grid  item  md={3}  sm={6}  xs={10} sx={commonstyle.select_input} >
                   <Typography>
-                    <FormControl
-                      sx={{
-                        m: 1,
-                        borderRadius: 2,
-                      }}
-                      size="small"
-                      fullWidth
-                    >
+                  <FormControl sx={ commonstyle.productlist_select_formcontrol } size="small" fullWidth >
                       <InputLabel id="demo-select-small">Brand</InputLabel>
                       <Select
                         labelId="demo-select-small"
@@ -818,22 +656,9 @@ export default function CustomizedAccordions() {
                   </Typography>
                 </Grid>
 
-                <Grid  item  md={3}  sm={6}  xs={10}
-                  sx={{
-                    "& .MuiOutlinedInput-notchedOutline": {
-                      border: "1px solid #B97DF0",
-                    },
-                  }}
-                >
+                <Grid  item  md={3}  sm={6}  xs={10} sx={commonstyle.select_input} >
                   <Typography>
-                    <FormControl
-                      sx={{
-                        m: 1,
-                        borderRadius: 2,
-                      }}
-                      size="small"
-                      fullWidth
-                    >
+                    <FormControl sx={ commonstyle.productlist_select_formcontrol } size="small" fullWidth >
                       <InputLabel id="demo-select-small">
                         Business Location
                       </InputLabel>
@@ -854,28 +679,10 @@ export default function CustomizedAccordions() {
                     </FormControl>
                   </Typography>
                 </Grid>
-                <Grid  item  md={3}  sm={6}  xs={10}
-                  sx={{
-                    "& .MuiOutlinedInput-notchedOutline": {
-                      border: "1px solid #B97DF0",
-                    },
-                  }}
-                >
+                <Grid  item  md={3}  sm={6}  xs={10} sx={commonstyle.select_input} >
                   <Typography>
-                    <FormControl
-                      sx={{
-                        m: 1,
-                        minWidth: 120,
-                        borderRadius: 2,
-                      }}
-                      size="small"
-                      fullWidth
-                    >
-                      <Select
-                        value={Status}
-                        onChange={handleChange7}
-                        displayEmpty
-                      >
+                  <FormControl sx={ commonstyle.productlist_select_formcontrol } size="small" fullWidth >
+                      <Select  value={Status}  onChange={handleChange7}  displayEmpty >
                         <MenuItem value="">All</MenuItem>
                         <MenuItem value={"active"}>Active</MenuItem>
                         <MenuItem value={"inactive"}>Inactive</MenuItem>
@@ -906,390 +713,253 @@ export default function CustomizedAccordions() {
 
       {/* ********Tabs Grid******** */}
 
-      <div>
-      <Grid
-        sx={{
-          margin: "33px",
-          bgcolor: "#fff",
-          height: "auto",
-          padding: "1px",
-          borderRadius: "10px",
-          borderTop: "5px solid #7009AB;",
-          boxShadow: "6px 6px 6px 6px #dedbdbae",
-        }}
-      >
-        <Box sx={{ width: "100%", typography: "body1" }}>
+      <>
+<br />
+<br />
+      <Grid sx={ commonstyle.container } >
+        <Box sx={{ typography: "body1" }}>
           <TabContext value={TabValue}>
             <Box>
               <TabList onChange={handleTabChange} aria-label="Tabs">
-                <Tab
-                  icon={<ViewInArIcon />}
-                  iconPosition="start"
-                  label="All Products"
-                  value="1"
-                  sx={{
-                    color: "#7009AB",
-                    "&.MuiTabs-indicator": {
-                      backgroundColor: "#7009AB",
-                      borderColor: "#7009AB",
-                    },
-                    "&.Mui-selected": {
-                      color: "#7009AB",
-                      borderColor: "#7009AB",
-                      backgroundColor: "#efecec",
-                    },
-                  }}
+                <Tab icon={<ViewInArIcon />} iconPosition="start" label="All Products" 
+                value="1" sx={commonstyle.productlist_tab}
                 />
-                <Tab
-                  icon={<HourglassFullIcon />}
-                  iconPosition="start"
-                  label="Stock Report"
-                  value="2"
-                  sx={{
-                    color: "#7009AB",
-                    "&.MuiTabs-indicator": {
-                      backgroundColor: "#7009AB",
-                      borderColor: "#7009AB",
-                    },
-                    "&.Mui-selected": {
-                      color: "#7009AB",
-                      borderColor: "#7009AB",
-                      backgroundColor: "#efecec",
-                    },
-                  }}
+                <Tab icon={<HourglassFullIcon />} iconPosition="start" label="Stock Report" 
+                value="2" sx={commonstyle.productlist_tab}
                 />
               </TabList>
             </Box>
-            <TabPanel value="1" sx={{ padding: 0, pt: 3 }}>
-              <div>
+            <TabPanel value="1" sx={commonstyle.productlist_tabpanel}>
+              <>
                 <br />
                 <Button
                   className="add_btn"
                   variant="contained"
-                  sx={{
-                    float: "right",
-                    width: 70,
-                    mr: 1,
-                    backgroundColor: "#7009AB",
-                    mt: -5,
-                  }}
+                  sx={commonstyle.productlist_add}
                 >
                   <AddIcon />
                   Add
                 </Button>
                 <Box sx={{ width: "100%" }}>
-      <Paper sx={{ width: "100%", mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+                  <Paper sx={{ width: "100%", mb: 2 }}>
+                    <EnhancedTableToolbar numSelected={selected.length} />
 
-        <TableContainer sx={{ padding: 3 }}>
-          <Grid
-            container
-            sx={{
-              justifyContent: "center",
-            }}
-          >
-            <Grid>
-              <Button className="users_btngrp" variant="outlined">
-                <FaFileCsv />
-                &ensp;Export to CSV
-              </Button>
-              <Button className="users_btngrp" variant="outlined">
-                <AiFillFileExcel />
-                &ensp;Export to Excel
-              </Button>
-              <Button className="users_btngrp" variant="outlined">
-                <FaPrint />
-                &ensp;Print
-              </Button>
-              <Button className="users_btngrp" variant="outlined">
-                <FaFilePdf />
-                &ensp;Export to PDF
-              </Button>
-            </Grid>
-          </Grid>
-          <Table
-            id="example"
-            sx={{ minWidth: 750 }}
-            aria-labelledby="tableTitle"
-            sx={{ pr: 1 }}
-          >
-            <EnhancedTableHead
-              numSelected={selected.length}
-              order={order}
-              orderBy={orderBy}
-              onSelectAllClick={handleSelectAllClick}
-              onRequestSort={handleRequestSort}
-              rowCount={rows.length}
-            />
-            <TableBody>
-              {stableSort(rows, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
-                  const isItemSelected = isSelected(row.productimage);
-                  const labelId = `enhanced-table-checkbox-${index}`;
+             {/* All Products Table */}
 
-                  return (
-                    <TableRow
-                      hover
-                      onClick={(event) => handleClick(event, row.productimage)}
-                      role="checkbox"
-                      aria-checked={isItemSelected}
-                      tabIndex={-1}
-                      key={row.productimage}
-                      selected={isItemSelected}
-                    >
-                      <TableCell padding="checkbox">
-                        <Checkbox
-                          color="primary"
-                          checked={isItemSelected}
-                          inputProps={{
-                            "aria-labelledby": labelId,
-                          }}
-                        />
-                      </TableCell>
-                      <TableCell
-                        component="th"
-                        id={labelId}
-                        scope="row"
-                        padding="none"
-                        align="center"
+                    <TableContainer sx={{ padding: 3 }}>
+                      <Grid container sx={{ justifyContent: "center",}} >
+                        <Grid>
+                          <Button sx={commonstyle.button_grp} variant="outlined">
+                            <FaFileCsv />&ensp;Export to CSV
+                          </Button>
+                          <Button sx={commonstyle.button_grp} variant="outlined">
+                            <AiFillFileExcel />&ensp;Export to Excel
+                          </Button>
+                          <Button sx={commonstyle.button_grp} variant="outlined">
+                            <FaPrint />&ensp;Print
+                          </Button>
+                          <Button sx={commonstyle.button_grp} variant="outlined">
+                            <FaFilePdf />&ensp;Export to PDF
+                          </Button>
+                        </Grid>
+                      </Grid>
+                      <Table
+                        id="example"
+                        sx={{ minWidth: 750 ,pr: 1 }}
+                        aria-labelledby="tableTitle"
                       >
-                        <Avatar
-                          sx={{ backgroundColor: "#cdcdcd" }}
-                          variant="square"
-                        ></Avatar>
-                      </TableCell>
-                      <TableCell align="center">
-                        <Button
-                          id="demo-customized-button"
-                          aria-controls={open ? "demo-customized-menu" : undefined}
-                          aria-haspopup="true"
-                          aria-expanded={open ? "true" : undefined}
-                          variant="contained"
-                          disableElevation
-                          onClick={handleClick_action}
-                          endIcon={<KeyboardArrowDownIcon />}
-                          size="small"
-                          xs={{ backgroundColor: "#000000" }}
-                          className="dropdown_actions"
-                        >
-                          Actions
-                        </Button>
-                        <StyledMenu
-                          id="demo-customized-menu"
-                          MenuListProps={{
-                            "aria-labelledby": "demo-customized-button",
-                          }}
-                          anchorEl={anchorEl}
-                          open={open}
-                          onClose={handleClose}
-                        >
-                          <MenuItem onClick={handleClose} disableRipple>
-                            <FaBarcode /> &nbsp; &nbsp; &nbsp;Labels
-                          </MenuItem>
-                          <MenuItem onClick={handleClose} disableRipple>
-                            <FaEye />
-                            &nbsp; &nbsp; &nbsp; View
-                          </MenuItem>
-                          <MenuItem onClick={handleClose} disableRipple>
-                            <FaEdit /> &nbsp;&nbsp; &nbsp; Edit
-                          </MenuItem>
-                          <MenuItem onClick={handleClose} disableRipple>
-                            <FaTrash /> &nbsp;&nbsp; &nbsp; Delete
-                          </MenuItem>
-                          <Divider sx={{ my: 2 }} />
-                          <MenuItem onClick={handleClose} disableRipple>
-                            <FaDatabase /> &nbsp;&nbsp; &nbsp; Add or edit opening stock
-                          </MenuItem>
-                          <MenuItem onClick={handleClose} disableRipple>
-                            <FaHistory /> &nbsp; &nbsp; &nbsp;Product stock history
-                          </MenuItem>
-                          <MenuItem onClick={handleClose} disableRipple>
-                            <FaCopy /> &nbsp; &nbsp; &nbsp;Duplicate Product
-                          </MenuItem>
-                        </StyledMenu>
-                      </TableCell>
-                      <TableCell align="center">{row.product}</TableCell>
-                      <TableCell align="center">
-                        {row.businesslocation}
-                      </TableCell>
-                      <TableCell align="center">{row.upprice}</TableCell>
-                      <TableCell align="center">{row.sprice}</TableCell>
-                      <TableCell align="center">{row.currentstock}</TableCell>
-                      <TableCell align="center">{row.producttype}</TableCell>
-                      <TableCell align="center">{row.category}</TableCell>
-                      <TableCell align="center">{row.brand}</TableCell>
-                      <TableCell align="center">{row.tax}</TableCell>
-                      <TableCell align="center">{row.sku}</TableCell>
-                      <TableCell align="center">{row.cf1}</TableCell>
-                      <TableCell align="center">{row.cf2}</TableCell>
-                      <TableCell align="center">{row.cf3}</TableCell>
-                      <TableCell align="center">{row.cf4}</TableCell>
-                    </TableRow>
-                  );
-                })}
-            </TableBody>
-          </Table>
-          <br />
-          <Button
-            variant="contained"
-            size="small"
-            sx={{
-              backgroundColor: "#f5365c",
-              borderColor: "#f41e48",
-              fontSize: 10,
-              "&:hover": {
-                backgroundColor: "#f50e3c",
-                color: "#fff",
-              },
-            }}
-          >
-            Delete Selected
-          </Button>
-          &nbsp;
-          <Button
-            variant="contained"
-            size="small"
-            sx={{
-              backgroundColor: "#2dce89",
-              borderColor: "#28b97b",
-              fontSize: 10,
-              "&:hover": {
-                backgroundColor: "#209764",
-                color: "#fff",
-              },
-            }}
-          >
-            Add to location
-          </Button>
-          &nbsp;
-          <Button
-            variant="contained"
-            size="small"
-            sx={{
-              backgroundColor: "#001f3f",
-              borderColor: "#001f3f",
-              fontSize: 10,
-              "&:hover": {
-                backgroundColor: "#14477c",
-                color: "#fff",
-              },
-            }}
-          >
-            Remove from location
-          </Button>
-          &nbsp;
-          <Button
-            variant="contained"
-            size="small"
-            sx={{
-              backgroundColor: "#ffad46",
-              borderColor: "#ffa22d",
-              fontSize: 10,
-              "&:hover": {
-                backgroundColor: "#ff8e00",
-                color: "#fff",
-              },
-            }}
-          >
-            Deactivate Selected
-          </Button>
-        </TableContainer>
-      </Paper>
-    </Box>
-              </div>
+                        <EnhancedTableHead
+                          numSelected={selected.length} order={order} orderBy={orderBy}
+                          onSelectAllClick={handleSelectAllClick} onRequestSort={handleRequestSort}
+                          rowCount={rows.length}
+                        />
+                        <TableBody>
+                          {stableSort(rows, getComparator(order, orderBy))
+                            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                            .map((row, index) => {
+                              const isItemSelected = isSelected(row.product);
+                              const labelId = `enhanced-table-checkbox-${index}`;
+
+                              return (
+                                <StyledTableRow
+                                  hover
+                                  onClick={(event) => handleClick(event, row.product)}
+                                  role="checkbox"
+                                  aria-checked={isItemSelected}
+                                  tabIndex={-1}
+                                  key={row.product}
+                                  selected={isItemSelected}
+                                  align="center"
+                                >
+                                  <StyledTableCell padding="checkbox">
+                                    <Checkbox
+                                      color="primary"
+                                      checked={isItemSelected}
+                                      inputProps={{
+                                        "aria-labelledby": labelId,
+                                      }}
+                                    />
+                                  </StyledTableCell>
+                                  <StyledTableCell
+                                    component="th"
+                                    id={labelId}
+                                    scope="row"
+                                    padding="none"
+                                  >
+                                    <Avatar
+                                      sx={{ backgroundColor: "#cdcdcd" }}
+                                      variant="square"
+                                    ></Avatar>
+                                  </StyledTableCell>
+
+                     {/* Actions Dropdown Button */}
+
+                                  <StyledTableCell>
+                                    <Button
+                                      id="demo-customized-button"
+                                      aria-controls={open ? "demo-customized-menu" : undefined}
+                                      aria-haspopup="true"
+                                      aria-expanded={open ? "true" : undefined}
+                                      variant="contained"
+                                      disableElevation
+                                      onClick={handleClick_action}
+                                      endIcon={<KeyboardArrowDownIcon />}
+                                      size="small"
+                                      sx={commonstyle.productlist_actionsdropdown}
+                                    >
+                                      Actions
+                                    </Button>
+
+                    {/* Actions Dropdown Button - List */}
+
+                                    <StyledMenu
+                                      id="demo-customized-menu"
+                                      MenuListProps={{
+                                        "aria-labelledby": "demo-customized-button",
+                                      }}
+                                      anchorEl={anchorEl} open={open} onClose={handleClose}
+                                    >
+                                      <MenuItem onClick={handleClose} disableRipple>
+                                        <FaBarcode /> &nbsp; &nbsp; &nbsp;Labels
+                                      </MenuItem>
+                                      <MenuItem onClick={handleClose} disableRipple>
+                                        <FaEye />
+                                        &nbsp; &nbsp; &nbsp; View
+                                      </MenuItem>
+                                      <MenuItem onClick={handleClose} disableRipple>
+                                        <FaEdit /> &nbsp;&nbsp; &nbsp; Edit
+                                      </MenuItem>
+                                      <MenuItem onClick={handleClose} disableRipple>
+                                        <FaTrash /> &nbsp;&nbsp; &nbsp; Delete
+                                      </MenuItem>
+                                      <Divider sx={{ my: 2 }} />
+                                      <MenuItem onClick={handleClose} disableRipple>
+                                        <FaDatabase /> &nbsp;&nbsp; &nbsp; Add or edit opening stock
+                                      </MenuItem>
+                                      <MenuItem onClick={handleClose} disableRipple>
+                                        <FaHistory /> &nbsp; &nbsp; &nbsp;Product stock history
+                                      </MenuItem>
+                                      <MenuItem onClick={handleClose} disableRipple>
+                                        <FaCopy /> &nbsp; &nbsp; &nbsp;Duplicate Product
+                                      </MenuItem>
+                                    </StyledMenu>
+                                  </StyledTableCell>
+                                  <StyledTableCell>{row.product}</StyledTableCell>
+                                  <StyledTableCell>{row.businesslocation}</StyledTableCell>
+                                  <StyledTableCell>{row.upprice}</StyledTableCell>
+                                  <StyledTableCell>{row.sprice}</StyledTableCell>
+                                  <StyledTableCell>{row.currentstock}</StyledTableCell>
+                                  <StyledTableCell>{row.producttype}</StyledTableCell>
+                                  <StyledTableCell>{row.category}</StyledTableCell>
+                                  <StyledTableCell>{row.brand}</StyledTableCell>
+                                  <StyledTableCell>{row.tax}</StyledTableCell>
+                                  <StyledTableCell>{row.sku}</StyledTableCell>
+                                  <StyledTableCell>{row.cf1}</StyledTableCell>
+                                  <StyledTableCell>{row.cf2}</StyledTableCell>
+                                  <StyledTableCell>{row.cf3}</StyledTableCell>
+                                  <StyledTableCell>{row.cf4}</StyledTableCell>
+                                </StyledTableRow>
+                              );
+                            })}
+                        </TableBody>
+                      </Table>
+                      <br />
+                      <Button  variant="contained"  size="small"  sx={commonstyle.productlist_delete_btn} >
+                        Delete Selected
+                      </Button>&nbsp;
+                      <Button  variant="contained"  size="small"  sx={commonstyle.productlist_addtolocation_btn} >
+                        Add to location
+                      </Button>&nbsp;
+                      <Button  variant="contained"  size="small"  sx={commonstyle.productlist_remove_btn} >
+                        Remove from location
+                      </Button>&nbsp;
+                      <Button  variant="contained"  size="small"  sx={commonstyle.productlist_deactive_btn} >
+                        Deactivate Selected
+                      </Button>
+                    </TableContainer>
+
+             {/* All Products Table Ends */}
+
+                  </Paper>
+                </Box>
+              </>
             </TabPanel>
 
-{/* *****Stock Report***** */}
+              {/* *****Stock Report***** */}
 
-            <TabPanel value="2" sx={{ padding: 0, pt: 3 }}>
-              <div>
+            <TabPanel value="2" sx={commonstyle.productlist_tabpanel}>
+              <>
 
+         {/* Stock Report Table */}
 
               <TableContainer component={Paper} sx={{ padding: 3 }}>
-                  <Grid
-                    container
-                    sx={{
-                      justifyContent: "center",
-                    }}
-                  >
+                <Grid container sx={{ justifyContent: "center",}} >
                     <Grid>
-                      <Button className="users_btngrp">
+                      <Button sx={commonstyle.button_grp}>
                         <FaFileCsv />&ensp;Export to CSV
                       </Button>
-                      <Button className="users_btngrp">
+                      <Button sx={commonstyle.button_grp}>
                         <AiFillFileExcel />&ensp;Export to Excel
                       </Button>
-                      <Button className="users_btngrp">
+                      <Button sx={commonstyle.button_grp}>
                         <FaPrint />&ensp;Print
                       </Button>
-                      <Button className="users_btngrp">
+                      <Button sx={commonstyle.button_grp}>
                         <FaFilePdf />&ensp;Export to PDF
                       </Button>
                     </Grid>
                   </Grid>
+                  
                   <Table id="example2" sx={{}} aria-label="simple table">
-                    <TableHead>
-                      <TableRow>
-                        <TableCell sx={{ fontWeight: "600", fontSize: "14px" }}>
-                          SKU
-                        </TableCell>
-                        <TableCell sx={{ fontWeight: "600", fontSize: "14px" }}>
-                          Product
-                        </TableCell>
-                        <TableCell sx={{ fontWeight: "600", fontSize: "14px" }}>
-                          Location
-                        </TableCell>
-                        <TableCell sx={{ fontWeight: "600", fontSize: "14px", width: 180 }}>
-                          Unit Price
-                        </TableCell>
-                        <TableCell sx={{ fontWeight: "600", fontSize: "14px" }}>
-                          Current Stock
-                        </TableCell>
-                        <TableCell sx={{ fontWeight: "600", fontSize: "14px" }}>
-                          Current Stock Value (By purchase price)
-                        </TableCell>
-                        <TableCell sx={{ fontWeight: "600", fontSize: "14px" }}>
-                          Current Stock Value (By sale price)
-                        </TableCell>
-                        <TableCell sx={{ fontWeight: "600", fontSize: "14px" }}>
-                          Potential Profit
-                        </TableCell>
-                        <TableCell sx={{ fontWeight: "600", fontSize: "14px" }}>
-                          Total Unit Sold
-                        </TableCell>
-                        <TableCell sx={{ fontWeight: "600", fontSize: "14px" }}>
-                          Total Unit Tranferred
-                        </TableCell>
-                        <TableCell sx={{ fontWeight: "600", fontSize: "14px" }}>
-                          Total Unit Adjusted
-                        </TableCell>
-                      </TableRow>
+                    <TableHead sx={{ fontWeight: "600", fontSize: "14px" }}>
+                      <StyledTableRow>
+                        <StyledTableCell >SKU</StyledTableCell>
+                        <StyledTableCell >Product</StyledTableCell>
+                        <StyledTableCell >Location</StyledTableCell>
+                        <StyledTableCell sx={{  width: 180 }}>Unit Price</StyledTableCell>
+                        <StyledTableCell >Current Stock</StyledTableCell>
+                        <StyledTableCell sx={{  width: 180 }}>Current Stock Value (By purchase price)</StyledTableCell>
+                        <StyledTableCell sx={{  width: 180 }}>Current Stock Value (By sale price)</StyledTableCell>
+                        <StyledTableCell >Potential Profit</StyledTableCell>
+                        <StyledTableCell >Total Unit Sold</StyledTableCell>
+                        <StyledTableCell >Total Unit Tranferred</StyledTableCell>
+                        <StyledTableCell >Total Unit Adjusted</StyledTableCell>
+                      </StyledTableRow>
                     </TableHead>
                     <TableBody>
                       {rows2.map((row) => (
-                        <TableRow
-                          key={row.sr_sku}
-                        >
-                          <TableCell component="th" scope="row">
-                            {row.sr_sku}
-                          </TableCell>
+                        <TableRow key={row.sr_sku} >
+                          <TableCell component="th" scope="row">{row.sr_sku}</TableCell>
                           <TableCell>{row.sr_product}</TableCell>
                           <TableCell>{row.sr_location}</TableCell>
                           <TableCell>
                             {row.sr_unitprice}
                             <br />
-                            <Button
-                              variant="outlined"
-                              onClick={handleClickModalOpen}
-                              size="small"
-                              sx={{ fontSize: 10, borderColor: "#7009AB", color: "#7009AB",
-                              "&:hover": {
-                                backgroundColor: "#7009AB",
-                                color: "#fff",
-                                borderColor: "#7009AB",
-                              }, }}
-                            >
+
+                  {/* View Group Prices Modal */}
+
+                            <Button  variant="outlined"  onClick={handleClickModalOpen}  
+                            size="small"  sx={commonstyle.productlist_viewbtn} >
                               View group prices
                             </Button>
                             <BootstrapDialog
@@ -1324,10 +994,7 @@ export default function CustomizedAccordions() {
                                 <br />
                               </DialogContent>
                               <DialogActions>
-                                <Button
-                                  autoFocus
-                                  onClick={handleModalClose}
-                                  variant="outlined"
+                                <Button  autoFocus  onClick={handleModalClose}  variant="outlined"
                                   sx={{
                                     backgroundColor: "#f4f4f4",
                                     borderColor: "#ddd",
@@ -1339,6 +1006,9 @@ export default function CustomizedAccordions() {
                               </DialogActions>
                             </BootstrapDialog>
                           </TableCell>
+
+                {/* View Group Prices Modal Ends */}
+
                           <TableCell>{row.sr_currentstock}</TableCell>
                           <TableCell>{row.sr_currentstock_pp}</TableCell>
                           <TableCell>{row.sr_currentstock_sp}</TableCell>
@@ -1373,12 +1043,16 @@ export default function CustomizedAccordions() {
                     </TableBody>
                   </Table>
                 </TableContainer>
-              </div>
+
+         {/* Stock Report Table Ends*/}
+
+              </>
             </TabPanel>
           </TabContext>
         </Box>
       </Grid>
-      </div>
+      </>
+      </Container>
     </Box>
   );
 }
