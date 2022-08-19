@@ -32,31 +32,13 @@ import {
 } from "react-icons/fa";
 import { AiFillFileExcel } from "react-icons/ai";
 
-function createData(
-  sr_sku,
-  sr_product,
-  sr_location,
-  sr_unitprice,
-  sr_currentstock,
-  sr_currentstock_pp,
-  sr_currentstock_sp,
-  sr_potentialprofit,
-  sr_totalunitsold,
-  sr_totalunittransferred,
-  sr_totalunitadjusted
-) {
-  return {
-    sr_sku,
-    sr_product,
-    sr_location,
-    sr_unitprice,
-    sr_currentstock,
-    sr_currentstock_pp,
-    sr_currentstock_sp,
-    sr_potentialprofit,
-    sr_totalunitsold,
-    sr_totalunittransferred,
-    sr_totalunitadjusted,
+function createData( sr_sku, sr_product, sr_location, sr_unitprice, sr_currentstock, 
+  sr_currentstock_pp, sr_currentstock_sp, sr_potentialprofit, sr_totalunitsold, 
+  sr_totalunittransferred, sr_totalunitadjusted) 
+  {
+  return { sr_sku, sr_product, sr_location, sr_unitprice, sr_currentstock, 
+    sr_currentstock_pp, sr_currentstock_sp, sr_potentialprofit, sr_totalunitsold, 
+    sr_totalunittransferred, sr_totalunitadjusted,
   };
 }
 
