@@ -1,14 +1,4 @@
-export const commonstyle = {
-    container : {
-        bgcolor: '#fff',
-        height: 'max-content',
-        borderTop: '5px solid #7009AB;',
-        borderLeft: '0px',
-        borderRight: '0px',
-        borderBottom: '0px',
-        borderRadius: '10px',
-        boxShadow: '6px 6px 6px 9px #dedbdbae',
-    },
+export const prodList = {
     button_grp: {
         bgcolor: '#fbf2ff',
         color: '#7009AB' ,
@@ -24,12 +14,11 @@ export const commonstyle = {
             border: "1px solid #B97DF0",
         },
     },
-    // list products - filter
-    productlist_select_formcontrol:{
+    select_formcontrol:{
         m: 1,
         borderRadius: 2,
     },
-    productlist_delete_btn:{
+    delete_btn:{
         backgroundColor: "#f5365c",
         borderColor: "#f41e48",
         fontSize: 10,
@@ -38,7 +27,7 @@ export const commonstyle = {
             color: "#fff",
         },
     },
-    productlist_addtolocation_btn:{
+    addtolocation_btn:{
         backgroundColor: "#2dce89",
         borderColor: "#28b97b",
         fontSize: 10,
@@ -47,7 +36,7 @@ export const commonstyle = {
             color: "#fff",
         },
     },
-    productlist_remove_btn:{
+    remove_btn:{
         backgroundColor: "#001f3f",
         borderColor: "#001f3f",
         fontSize: 10,
@@ -56,7 +45,7 @@ export const commonstyle = {
             color: "#fff",
         },
     },
-    productlist_deactive_btn:{
+    deactive_btn:{
         backgroundColor: "#ffad46",
         borderColor: "#ffa22d",
         fontSize: 10,
@@ -65,7 +54,7 @@ export const commonstyle = {
             color: "#fff",
         },
     },
-    productlist_viewbtn:{
+    viewbtn:{
         fontSize: 9, 
         padding: "2px 1px",
         borderColor: "#7009AB", 
@@ -77,11 +66,11 @@ export const commonstyle = {
         },
 
     },
-    productlist_tabpanel:{
+    tabpanel:{
         padding: 0, 
         pt: 3 
     },
-    productlist_tab:{
+    tab:{
         color: "#7009AB",
         "&.MuiTabs-indicator": {
             backgroundColor: "#7009AB",
@@ -93,25 +82,88 @@ export const commonstyle = {
             backgroundColor: "#efecec",
         },
     },   
-    productlist_add:{
+    add:{
         float: "right",
-        width: 70,
+        width: "97px",
         fontWeight: 600,
         mr: 1,
         backgroundColor: "#7009AB",
          mt: -5,
+         color:"#A5BECC",
          "&:hover":{
             backgroundColor: "#fff",
             border: "1px solid #7009AB",
             color: "#7009AB",
          }
     },
-    productlist_actionsdropdown:{
+    actionsdropdown:{
         backgroundColor:"#b97df0",
         fontSize: 11,
         "&:hover":{
             backgroundColor: "#fff",
             color: "#b97df0"
         }
-    }
+    },
+}
+
+export const prodStyle = {
+    prod_container : {
+        bgcolor: '#fff',
+        height: 'max-content',
+        borderTop: '5px solid #7009AB;',
+        borderLeft: '0px',
+        borderRight: '0px',
+        borderBottom: '0px',
+        borderRadius: '10px',
+        boxShadow: '6px 6px 6px 9px #dedbdbae',
+    },
+    prod_uploadbtn : {
+        border:'1px solid #B97DF0 !important',
+        borderRadius: '7px !important',
+        width: '159px !important',
+        fontSize: '11px !important',
+        color: '#7009AB !important',
+        fontWeight: '600 !important',
+            '&:hover' : {
+                backgroundColor: '#7009AB !important',
+                color: '#fff !important',
+            },
+    },
+    prod_tablehd : {
+        backgroundColor: '#7009AB !important',
+        fontSize: '20px !important',
+        color: '#fff !important',
+    },
+    prod_saveadd : {
+        border: '1px solid #7009AB !important',
+        color: '#7009AB !important',
+        marginRight: '5px !important',
+        height: '40px !important',
+        padding: '10px !important',
+        fontWeight: '600 !important',
+        borderRadius: '7px !important',
+        '&:hover' : {
+            backgroundColor: '#7009AB !important',
+            border: '0px !important',
+            color: '#fff !important',
+        },
+    },
+    prod_save : {
+        border: '1px solid #7009AB !important',
+        color: '#7009AB !important',
+        height: '40px !important',
+        fontWeight: '600 !important',
+        borderRadius: '7px !important',
+        width: '80px',
+        '&:hover' : {
+            backgroundColor: '#7009AB !important',
+            border: '0px !important',
+            color: '#fff !important',
+        },
+    },
+    prod_grid_container : {
+        marginTop: '10px',
+        marginBottom: '10px',
+        justifyContent: 'center',
+    },
 }

@@ -30,7 +30,8 @@ import { FaFileCsv, FaPrint, FaFilePdf, FaEdit, FaEye, FaTrash,
   FaDatabase, FaHistory, FaCopy, FaBarcode,} from "react-icons/fa";
 import { AiFillFileExcel } from "react-icons/ai";
 import { visuallyHidden } from "@mui/utils";
-import {commonstyle} from "./Commonstyle";
+import {Link} from "react-router-dom";
+import {prodStyle, prodList} from "./ProductStyle";
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -162,6 +163,7 @@ const headCells = [
   { id: "cf3", numeric: true, disablePadding: false, label: "Custom Field3", },
   { id: "cf4", numeric: true, disablePadding: false, label: "Custom Field4", },
 ];
+
 
 // All Products Table Head function
 function EnhancedTableHead(props) {
@@ -367,6 +369,9 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 
 export default function CustomizedAccordions() {
 
+// Filter - All Select Inputs
+const [productFilter, setProductFilter] = useState({ProductType: "",Category: "",Unit:"",Tax:"",Brand:"",BusinessLocation:"",Status:""})
+
 // Table 1 - All Products
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("product");
@@ -452,55 +457,6 @@ export default function CustomizedAccordions() {
     setExpanded(newExpanded ? panel : false);
   };
 
-// Select-ProductType
-  const [ProductType, setProductType] = useState("");
-
-  const handleChange1 = (event) => {
-    setProductType(event.target.value);
-  };
-
-// Select-Category
-  const [Category, setCategory] = useState("");
-
-  const handleChange2 = (event) => {
-    setCategory(event.target.value);
-  };
-
-// Select-Unit
-  const [Unit, setUnit] = useState("");
-
-  const handleChange3 = (event) => {
-    setUnit(event.target.value);
-  };
-
-// Select-Tax
-  const [Tax, setTax] = useState("");
-
-  const handleChange4 = (event) => {
-    setTax(event.target.value);
-  };
-
-// Select-Brand
-  const [Brand, setBrand] = useState("");
-
-  const handleChange5 = (event) => {
-    setBrand(event.target.value);
-  };
-
-// Select-BusinessLocation
-  const [BusinessLocation, setBusinessLocation] = useState("");
-
-  const handleChange6 = (event) => {
-    setBusinessLocation(event.target.value);
-  };
-
-// Select-Status
-  const [Status, setStatus] = useState("");
-
-  const handleChange7 = (event) => {
-    setStatus(event.target.value);
-  };
-
   const [TabValue, setTabValue] = useState("1");
 
   const handleTabChange = (event, newValue) => {
@@ -548,7 +504,7 @@ export default function CustomizedAccordions() {
           <Accordion
             expanded={expanded === "panel1"}
             onChange={handleChangePanel("panel1")}
-            sx={ commonstyle.container}
+            sx={ prodStyle.prod_container}
           >
             <AccordionSummary
               aria-controls="panel1d-content"
@@ -560,19 +516,18 @@ export default function CustomizedAccordions() {
             </AccordionSummary>
             <AccordionDetails>
               <Grid container spacing={2}>
-              <Grid  item  md={3}  sm={6}  xs={10} sx={commonstyle.select_input} >
+                <Grid  item  md={3}  sm={6}  xs={10} sx={prodList.select_input} >
                   <Typography>
-                  <FormControl sx={ commonstyle.productlist_select_formcontrol } size="small" fullWidth >
-                      <InputLabel id="demo-select-small">
-                        Product Type
-                      </InputLabel>
+                    <FormControl sx={ prodList.select_formcontrol } size="small" fullWidth >
+                      <InputLabel id="demo-select-small">Product Type </InputLabel>
                       <Select
                         labelId="demo-select-small"
                         id="demo-select-small"
-                        value={ProductType}
+                        value={productFilter.ProductType}
                         label="Product Type"
-                        onChange={handleChange1}
-                        autoFocus="true"
+                        onChange={(event) => {
+                          setProductFilter({...productFilter, ProductType: event.target.value})
+                        }}
                       >
                         <MenuItem value="">All</MenuItem>
                         <MenuItem value={"single"}>Single</MenuItem>
@@ -583,16 +538,18 @@ export default function CustomizedAccordions() {
                   </Typography>
                 </Grid>
 
-                <Grid  item  md={3}  sm={6}  xs={10} sx={commonstyle.select_input} >
+                <Grid  item  md={3}  sm={6}  xs={10} sx={prodList.select_input} >
                   <Typography>
-                  <FormControl sx={ commonstyle.productlist_select_formcontrol } size="small" fullWidth >
+                  <FormControl sx={ prodList.select_formcontrol } size="small" fullWidth >
                       <InputLabel id="demo-select-small">Category</InputLabel>
                       <Select
                         labelId="demo-select-small"
                         id="demo-select-small"
-                        value={Category}
+                        value={productFilter.Category}
                         label="Category"
-                        onChange={handleChange2}
+                        onChange={(event) => {
+                          setProductFilter({...productFilter, Category: event.target.value})
+                        }}
                       >
                         <MenuItem value="category_all">All</MenuItem>
                       </Select>
@@ -600,16 +557,18 @@ export default function CustomizedAccordions() {
                   </Typography>
                 </Grid>
 
-                <Grid  item  md={3}  sm={6}  xs={10} sx={commonstyle.select_input} >
+                <Grid  item  md={3}  sm={6}  xs={10} sx={prodList.select_input} >
                   <Typography>
-                  <FormControl sx={ commonstyle.productlist_select_formcontrol } size="small" fullWidth >
+                  <FormControl sx={ prodList.select_formcontrol } size="small" fullWidth >
                       <InputLabel id="demo-select-small">Unit</InputLabel>
                       <Select
                         labelId="demo-select-small"
                         id="demo-select-small"
-                        value={Unit}
+                        value={productFilter.Unit}
                         label="Unit"
-                        onChange={handleChange3}
+                        onChange={(event) => {
+                          setProductFilter({...productFilter, Unit: event.target.value})
+                        }}
                       >
                         <MenuItem value="">All</MenuItem>
                         <MenuItem value={"pieces"}>Pieces (Pc(s))</MenuItem>
@@ -618,16 +577,18 @@ export default function CustomizedAccordions() {
                   </Typography>
                 </Grid>
 
-                <Grid  item  md={3}  sm={6}  xs={10} sx={commonstyle.select_input} >
+                <Grid  item  md={3}  sm={6}  xs={10} sx={prodList.select_input} >
                   <Typography>
-                  <FormControl sx={ commonstyle.productlist_select_formcontrol } size="small" fullWidth >
+                  <FormControl sx={  prodList.select_formcontrol } size="small" fullWidth >
                       <InputLabel id="demo-select-small">Tax</InputLabel>
                       <Select
                         labelId="demo-select-small"
                         id="demo-select-small"
-                        value={Tax}
+                        value={productFilter.Tax}
                         label="Tax"
-                        onChange={handleChange4}
+                        onChange={(event) => {
+                          setProductFilter({...productFilter, Tax: event.target.value})
+                        }}
                       >
                         <MenuItem value="">All</MenuItem>
                         <MenuItem value={"gst"}>GST</MenuItem>
@@ -638,16 +599,18 @@ export default function CustomizedAccordions() {
                   </Typography>
                 </Grid>
 
-                <Grid  item  md={3}  sm={6}  xs={10} sx={commonstyle.select_input} >
+                <Grid  item  md={3}  sm={6}  xs={10} sx={prodList.select_input} >
                   <Typography>
-                  <FormControl sx={ commonstyle.productlist_select_formcontrol } size="small" fullWidth >
+                  <FormControl sx={  prodList.select_formcontrol } size="small" fullWidth >
                       <InputLabel id="demo-select-small">Brand</InputLabel>
                       <Select
                         labelId="demo-select-small"
                         id="demo-select-small"
-                        value={Brand}
+                        value={productFilter.Brand}
                         label="Brand"
-                        onChange={handleChange5}
+                        onChange={(event) => {
+                          setProductFilter({...productFilter, Brand: event.target.value})
+                        }}
                       >
                         <MenuItem value="">All</MenuItem>
                         <MenuItem value={"motog"}>MotoG</MenuItem>
@@ -656,18 +619,20 @@ export default function CustomizedAccordions() {
                   </Typography>
                 </Grid>
 
-                <Grid  item  md={3}  sm={6}  xs={10} sx={commonstyle.select_input} >
+                <Grid  item  md={3}  sm={6}  xs={10} sx={prodList.select_input} >
                   <Typography>
-                    <FormControl sx={ commonstyle.productlist_select_formcontrol } size="small" fullWidth >
+                    <FormControl sx={  prodList.select_formcontrol } size="small" fullWidth >
                       <InputLabel id="demo-select-small">
-                        Business Location
+                        Business Location 
                       </InputLabel>
                       <Select
                         labelId="demo-select-small"
                         id="demo-select-small"
-                        value={BusinessLocation}
+                        value={productFilter.BusinessLocation}
                         label="Business Location"
-                        onChange={handleChange6}
+                        onChange={(event) => {
+                          setProductFilter({...productFilter, BusinessLocation: event.target.value})
+                        }}
                       >
                         <MenuItem value="">All</MenuItem>
                         <MenuItem value={"none"}>None</MenuItem>
@@ -679,10 +644,13 @@ export default function CustomizedAccordions() {
                     </FormControl>
                   </Typography>
                 </Grid>
-                <Grid  item  md={3}  sm={6}  xs={10} sx={commonstyle.select_input} >
+
+                <Grid  item  md={3}  sm={6}  xs={10} sx={prodList.select_input} >
                   <Typography>
-                  <FormControl sx={ commonstyle.productlist_select_formcontrol } size="small" fullWidth >
-                      <Select  value={Status}  onChange={handleChange7}  displayEmpty >
+                  <FormControl sx={  prodList.select_formcontrol } size="small" fullWidth >
+                      <Select  value={productFilter.Status}   onChange={(event) => {
+                          setProductFilter({...productFilter, Status: event.target.value})
+                        }}  displayEmpty >
                         <MenuItem value="">All</MenuItem>
                         <MenuItem value={"active"}>Active</MenuItem>
                         <MenuItem value={"inactive"}>Inactive</MenuItem>
@@ -690,6 +658,7 @@ export default function CustomizedAccordions() {
                     </FormControl>
                   </Typography>
                 </Grid>
+
                 <Grid item md={3} sm={6} xs={10}>
                   <Typography>
                     <FormControl sx={{ m: 1 }} size="small" fullWidth>
@@ -705,6 +674,7 @@ export default function CustomizedAccordions() {
                     </FormControl>
                   </Typography>
                 </Grid>
+
               </Grid>
             </AccordionDetails>
           </Accordion>
@@ -716,29 +686,31 @@ export default function CustomizedAccordions() {
       <>
 <br />
 <br />
-      <Grid sx={ commonstyle.container } >
+      <Grid sx={ prodStyle.prod_container } >
         <Box sx={{ typography: "body1" }}>
           <TabContext value={TabValue}>
             <Box>
               <TabList onChange={handleTabChange} aria-label="Tabs">
                 <Tab icon={<ViewInArIcon />} iconPosition="start" label="All Products" 
-                value="1" sx={commonstyle.productlist_tab}
+                value="1" sx={prodList.tab}
                 />
                 <Tab icon={<HourglassFullIcon />} iconPosition="start" label="Stock Report" 
-                value="2" sx={commonstyle.productlist_tab}
+                value="2" sx={prodList.tab}
                 />
               </TabList>
             </Box>
-            <TabPanel value="1" sx={commonstyle.productlist_tabpanel}>
+            <TabPanel value="1" sx={prodList.tabpanel}>
               <>
                 <br />
                 <Button
                   className="add_btn"
                   variant="contained"
-                  sx={commonstyle.productlist_add}
+                  sx={prodList.add}
                 >
+                    <Link to="addproduct" style={{color: "#A5BECC",textDecoration: "none"}}>
                   <AddIcon />
                   Add
+                  </Link>
                 </Button>
                 <Box sx={{ width: "100%" }}>
                   <Paper sx={{ width: "100%", mb: 2 }}>
@@ -749,16 +721,16 @@ export default function CustomizedAccordions() {
                     <TableContainer sx={{ padding: 3 }}>
                       <Grid container sx={{ justifyContent: "center",}} >
                         <Grid>
-                          <Button sx={commonstyle.button_grp} variant="outlined">
+                          <Button sx={prodList.button_grp} variant="outlined">
                             <FaFileCsv />&ensp;Export to CSV
                           </Button>
-                          <Button sx={commonstyle.button_grp} variant="outlined">
+                          <Button sx={prodList.button_grp} variant="outlined">
                             <AiFillFileExcel />&ensp;Export to Excel
                           </Button>
-                          <Button sx={commonstyle.button_grp} variant="outlined">
+                          <Button sx={prodList.button_grp} variant="outlined">
                             <FaPrint />&ensp;Print
                           </Button>
-                          <Button sx={commonstyle.button_grp} variant="outlined">
+                          <Button sx={prodList.button_grp} variant="outlined">
                             <FaFilePdf />&ensp;Export to PDF
                           </Button>
                         </Grid>
@@ -825,7 +797,7 @@ export default function CustomizedAccordions() {
                                       onClick={handleClick_action}
                                       endIcon={<KeyboardArrowDownIcon />}
                                       size="small"
-                                      sx={commonstyle.productlist_actionsdropdown}
+                                      sx={prodList.actionsdropdown}
                                     >
                                       Actions
                                     </Button>
@@ -842,15 +814,18 @@ export default function CustomizedAccordions() {
                                       <MenuItem onClick={handleClose} disableRipple>
                                         <FaBarcode /> &nbsp; &nbsp; &nbsp;Labels
                                       </MenuItem>
-                                      <MenuItem onClick={handleClose} disableRipple>
-                                        <FaEye />
-                                        &nbsp; &nbsp; &nbsp; View
+                                      <MenuItem >
+                                      <Link to="viewproduct" disableRipple style={{color:"rgb(55, 65, 81)",textDecoration: "none"}} >
+                                        <FaEye />  &nbsp;&nbsp; &nbsp;View
+                                        </Link>
+                                      </MenuItem>
+                                      <MenuItem>
+                                      <Link to="editproduct" fullWidth disableRipple style={{color:"rgb(55, 65, 81)",textDecoration: "none"}}>
+                                         <FaEdit /> &nbsp;&nbsp; &nbsp;Edit
+                                         </Link>
                                       </MenuItem>
                                       <MenuItem onClick={handleClose} disableRipple>
-                                        <FaEdit /> &nbsp;&nbsp; &nbsp; Edit
-                                      </MenuItem>
-                                      <MenuItem onClick={handleClose} disableRipple>
-                                        <FaTrash /> &nbsp;&nbsp; &nbsp; Delete
+                                        <FaTrash />  &nbsp;&nbsp; &nbsp;  Delete
                                       </MenuItem>
                                       <Divider sx={{ my: 2 }} />
                                       <MenuItem onClick={handleClose} disableRipple>
@@ -884,16 +859,16 @@ export default function CustomizedAccordions() {
                         </TableBody>
                       </Table>
                       <br />
-                      <Button  variant="contained"  size="small"  sx={commonstyle.productlist_delete_btn} >
+                      <Button  variant="contained"  size="small"  sx={prodList.delete_btn} >
                         Delete Selected
                       </Button>&nbsp;
-                      <Button  variant="contained"  size="small"  sx={commonstyle.productlist_addtolocation_btn} >
+                      <Button  variant="contained"  size="small"  sx={prodList.addtolocation_btn} >
                         Add to location
                       </Button>&nbsp;
-                      <Button  variant="contained"  size="small"  sx={commonstyle.productlist_remove_btn} >
+                      <Button  variant="contained"  size="small"  sx={prodList.remove_btn} >
                         Remove from location
                       </Button>&nbsp;
-                      <Button  variant="contained"  size="small"  sx={commonstyle.productlist_deactive_btn} >
+                      <Button  variant="contained"  size="small"  sx={prodList.deactive_btn} >
                         Deactivate Selected
                       </Button>
                     </TableContainer>
@@ -907,7 +882,7 @@ export default function CustomizedAccordions() {
 
               {/* *****Stock Report***** */}
 
-            <TabPanel value="2" sx={commonstyle.productlist_tabpanel}>
+            <TabPanel value="2" sx={prodList.tabpanel}>
               <>
 
          {/* Stock Report Table */}
@@ -915,16 +890,16 @@ export default function CustomizedAccordions() {
               <TableContainer component={Paper} sx={{ padding: 3 }}>
                 <Grid container sx={{ justifyContent: "center",}} >
                     <Grid>
-                      <Button sx={commonstyle.button_grp}>
+                      <Button sx={prodList.button_grp}>
                         <FaFileCsv />&ensp;Export to CSV
                       </Button>
-                      <Button sx={commonstyle.button_grp}>
+                      <Button sx={prodList.button_grp}>
                         <AiFillFileExcel />&ensp;Export to Excel
                       </Button>
-                      <Button sx={commonstyle.button_grp}>
+                      <Button sx={prodList.button_grp}>
                         <FaPrint />&ensp;Print
                       </Button>
-                      <Button sx={commonstyle.button_grp}>
+                      <Button sx={prodList.button_grp}>
                         <FaFilePdf />&ensp;Export to PDF
                       </Button>
                     </Grid>
@@ -959,7 +934,7 @@ export default function CustomizedAccordions() {
                   {/* View Group Prices Modal */}
 
                             <Button  variant="outlined"  onClick={handleClickModalOpen}  
-                            size="small"  sx={commonstyle.productlist_viewbtn} >
+                            size="small"  sx={prodList.viewbtn} >
                               View group prices
                             </Button>
                             <BootstrapDialog
